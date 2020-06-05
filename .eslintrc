@@ -20,7 +20,11 @@
         "padded-blocks":"off",
         "comma-spacing":"off",
         "comma-dangle":"off",
-        "quotes":"off"
+        "quotes":"off",
+        "arrow-parens":"off",
+        "max-len":"off",
+        "operator-linebreak":"off",
+        "no-unused-vars": "off"
       
     },
 
