@@ -6,18 +6,16 @@ export function resizeHandler($root){
   const coords = $parent.getCoords()
   const cells = $root.findAll(`[data-type="${$parent.data.col}"]`)
   const type = $resizer.data.resize
+  const side = type === "col" ? "bottom" : "right"
   let value
 
-  const side = type === "col" ? "bottom" : "right"
-  
+
   $resizer.css({
       opacity: 1,
       [side]: "-5000px",
       zIndex: 111
   })
-
   document.onmousemove = e => {
-
       if (type === 'col'){
           const delta = e.pageX - coords.right
           value = coords.width + delta
@@ -28,14 +26,10 @@ export function resizeHandler($root){
           value = coords.height + delta
           $resizer.css({bottom: -delta + 'px'})                      
       }
-
   }
-
-  
   document.onmouseup = (e) => {
       document.onmousemove = null
       document.onmouseup = null
-
       if (type === 'col'){
           $parent.css({width: value + 'px'})
           cells.forEach(el => {el.style.width = value + 'px'})
@@ -49,7 +43,6 @@ export function resizeHandler($root){
           right: 0,
           bottom: 0
       })
-    
-
   }
+
 }
