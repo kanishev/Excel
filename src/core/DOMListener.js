@@ -3,7 +3,7 @@ import {recreate} from "./util";
 export class DOMListener{
     constructor($root, listeners = []){
         if (!$root){
-            throw new Error(`No $root provided for DOMLitener!`);       
+            throw new Error(`No $root provided for DOMLitener!`)       
         }
         this.$root = $root
         this.listeners = listeners
