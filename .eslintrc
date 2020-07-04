@@ -1,0 +1,33 @@
+{
+    
+    "parser": "babel-eslint",
+  
+    "env":{
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+ 
+
+    "rules": {
+        "require-jsdoc":"off",
+        "indent":"off",
+        "linebreak-style": "off",
+        "semi": "off",
+        "eol-last": "off",
+        "space-before-blocks":"off",
+        "no-trailing-spaces": "off",
+        "padded-blocks":"off",
+        "comma-spacing":"off",
+        "comma-dangle":"off",
+        "quotes":"off",
+        "arrow-parens":"off",
+        "max-len":"off",
+        "operator-linebreak":"off",
+        "no-unused-vars": "off",
+        "brace-style":"off",
+      
+    },
+
+    "extends": ["eslint:recommended", "google"]
+}
