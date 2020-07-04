@@ -7,11 +7,28 @@ export class ExcelComponent extends DOMListener{
         super($root, options.listeners)
         this.name = options.name || '',
         this.emitter = options.emitter,
-        this.unsubs = []
+        this.subscribe = options.subscribe || [],
+        this.store = options.store,
+        this.unsubs = [],
+        this.prepare()
     }
+
+    prepare() {}
 
     toHTML(){
         return ''
+    }
+
+    $dispatch(action){
+        this.store.dispatch(action)
+    }
+
+    storeChanged() {
+
+    }
+
+    isWatching(key){
+       return this.subscribe.includes(key)
     }
 
     $on(data, fn){

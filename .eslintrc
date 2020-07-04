@@ -25,7 +25,7 @@
         "max-len":"off",
         "operator-linebreak":"off",
         "no-unused-vars": "off",
-        "brace-style":"off"
+        "brace-style":"off",
       
     },
 

@@ -87,6 +87,13 @@ class Dom {
         })
     }
 
+    getStyles(styles = []){
+        return styles.reduce((arr, s) => {
+            arr[s] = this.$el.style[s]
+            return arr
+        }, {})
+    }
+
     addClass(className){
         this.$el.classList.add(className)
         return this
