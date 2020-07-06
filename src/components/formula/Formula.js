@@ -24,12 +24,12 @@ export class Formula extends ExcelComponent{
 
     init(){
         super.init()
-        this.$target = this.$root.find('#formula')
-        this.$on('table:select', $cell => this.$target.text($cell.text()))
+        this.$formula = this.$root.find('#formula')
+        this.$on('table:select', $cell => this.$formula.text($cell.data.value))
     }
 
     storeChanged({currentText}){
-        this.$target.text(currentText)
+        this.$formula.text(currentText)
     }
 
     onInput(event){

@@ -11,6 +11,7 @@ export class ExcelComponent extends DOMListener{
         this.store = options.store,
         this.unsubs = [],
         this.prepare()
+
     }
 
     prepare() {}
