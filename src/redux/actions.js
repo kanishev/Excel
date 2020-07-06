@@ -1,4 +1,4 @@
-import {TABLE_RESIZE, CHANGE_TEXT, CHANGE_STYLES} from "./types";
+import {TABLE_RESIZE, CHANGE_TEXT, CHANGE_STYLES, APPLY_STYLE, CHANGE_HEADER} from "./types";
 
 export function tableResize(data){
   return {
@@ -20,3 +20,18 @@ export function changeStyles(data) {
     data
   }
   }
+
+  
+export function applyStyle(data) {
+  return {
+    type: APPLY_STYLE,
+    data
+  }
+  }  
+
+  export function changeHeader(data) {
+    return {
+      type: CHANGE_HEADER,
+      data
+    }
+    }    

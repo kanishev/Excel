@@ -8,6 +8,9 @@ import {shouldSelect} from '@/components/table/table.functions';
 import {matrix, nextSelecotor} from './table.functions';
 import * as actions from '@/redux/actions'
 import {defaultStyles} from '../../constants';
+import {parse} from '../../core/parse';
+
+
 export class Table extends ExcelComponent{
 
     static className = 'excel__table'
@@ -18,14 +21,12 @@ export class Table extends ExcelComponent{
             listeners: ['mousedown', 'keydown', 'input'],
             ...options
         })
-
     }
 
     selectCell($cell){
         this.selection.select($cell)
         this.$emit('table:select', $cell)
         const styles = $cell.getStyles(Object.keys(defaultStyles))
-        console.log(styles)
         this.$dispatch(actions.changeStyles(styles))
     }
 
@@ -47,8 +48,6 @@ export class Table extends ExcelComponent{
         }))
     }
 
-    // ------------------------------------------------------------------------------------------------ //
-
     toHTML(){
        return createTable(25, this.store.getState())
     }
@@ -63,7 +62,8 @@ export class Table extends ExcelComponent{
         this.selectCell(elem)
 
         this.$on('formula:text', data => { 
-        this.selection.native.text(data)
+        this.selection.native.attr('data-value', data)
+        this.selection.native.text(parse(data))
         this.updateTextInStore(data)
         }) 
         
@@ -71,8 +71,12 @@ export class Table extends ExcelComponent{
             this.selection.native.focus()
         })
 
-        this.$on('toolbarStyle', style => {
-            this.selection.selectStyle(style)
+        this.$on('toolbarStyle', value => {
+            this.selection.selectStyle(value)
+            this.$dispatch(actions.applyStyle({
+                value, 
+                ids: this.selection.selectedIds
+            }))
         })
     }
 
@@ -108,9 +112,7 @@ export class Table extends ExcelComponent{
     }
 
     onInput(event){
-        this.updateTextInStore($(event.target).text())
-        
-       
+        this.updateTextInStore($(event.target).text())  
     }
    
 } 

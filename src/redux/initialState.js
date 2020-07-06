@@ -1,12 +1,20 @@
 import {storage} from "../core/util"
-import {defaultStyles} from '../../src/constants';
+import {defaultStyles, defaultTitle} from '../../src/constants';
 
 const defaultState = {
   colState: {},
   rowState: {},
   dataState: {},
+  stylesState: {},
   currentText: '',
-  currentStyles: defaultStyles
+  currentStyles: defaultStyles,
+  currentHeader: defaultTitle
 }
 
-export const initialState = storage('table-resize') ? storage('table-resize') : defaultState
+const normalize = state => ({
+  ...state,
+  currentStyles: defaultStyles,
+  currentText: ''
+})
+
+export const initialState = storage('table-resize') ? normalize(storage('table-resize')) : defaultState
