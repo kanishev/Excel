@@ -1,4 +1,4 @@
-import {TABLE_RESIZE, CHANGE_TEXT, CHANGE_STYLES, APPLY_STYLE, CHANGE_HEADER} from "./types"
+import {TABLE_RESIZE, CHANGE_TEXT, CHANGE_STYLES, APPLY_STYLE, CHANGE_HEADER, CHANGE_DATE} from "./types"
 
 export function rootReducer(state, action) { 
   let field
@@ -30,10 +30,16 @@ export function rootReducer(state, action) {
 
       return {...state, [field]: val, currentStyles: {...state.currentStyles, ...action.data.value}};
 
-    default: return state
 
     case CHANGE_HEADER: 
       return {...state, currentHeader: action.data}
+
+    case CHANGE_DATE: 
+      return {...state, date: new Date().toJSON()}
+
+      
+    default: return state
+
   }
 }  
 

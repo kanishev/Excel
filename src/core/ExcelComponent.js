@@ -11,30 +11,25 @@ export class ExcelComponent extends DOMListener{
         this.store = options.store,
         this.unsubs = [],
         this.prepare()
-
     }
 
     prepare() {}
 
-    toHTML(){
-        return ''
-    }
+    toHTML(){return ''}
 
     $dispatch(action){
         this.store.dispatch(action)
     }
 
-    storeChanged() {
-
-    }
+    storeChanged() {}
 
     isWatching(key){
        return this.subscribe.includes(key)
     }
 
     $on(data, fn){
-        this.emitter.subscribe(data, fn) 
-        this.unsubs.push(fn)
+        const unsub = this.emitter.subscribe(data, fn) 
+        this.unsubs.push(unsub)
     }
 
     $emit(data, ...args){
