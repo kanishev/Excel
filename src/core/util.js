@@ -53,3 +53,10 @@ export function debounce(fn, ms){
     }
 }
 
+export function clone(state){
+  return JSON.parse(JSON.stringify(state))
+}
+
+export function preventDefault(event){
+  event.preventDefault()
+}
