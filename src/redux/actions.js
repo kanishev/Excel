@@ -1,44 +1,50 @@
-import {TABLE_RESIZE, CHANGE_TEXT, CHANGE_STYLES, APPLY_STYLE, CHANGE_HEADER, CHANGE_DATE} from "./types";
+import {
+  TABLE_RESIZE,
+  CHANGE_TEXT,
+  CHANGE_STYLES,
+  APPLY_STYLE,
+  CHANGE_HEADER,
+  CHANGE_DATE,
+} from "./types";
 
-export function tableResize(data){
+export function tableResize(data) {
   return {
     type: TABLE_RESIZE,
-    data
-  }
-} 
+    data,
+  };
+}
 
-export function changeText(data){
+export function changeText(data) {
   return {
     type: CHANGE_TEXT,
-    data
-  }
-} 
+    data,
+  };
+}
 
 export function changeStyles(data) {
   return {
     type: CHANGE_STYLES,
-    data
-  }
-  }
+    data,
+  };
+}
 
-  
 export function applyStyle(data) {
   return {
     type: APPLY_STYLE,
-    data
-  }
-  }  
+    data,
+  };
+}
 
-  export function changeHeader(data) {
-    return {
-      type: CHANGE_HEADER,
-      data
-    }
-    }    
+export function changeHeader(data) {
+  return {
+    type: CHANGE_HEADER,
+    data,
+  };
+}
 
-    export function changeDate(data) {
-      return {
-        type: CHANGE_DATE,
-        data
-      }
-      }        
+export function changeDate(data) {
+  return {
+    type: CHANGE_DATE,
+    data,
+  };
+}

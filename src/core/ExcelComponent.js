@@ -1,47 +1,47 @@
-import {DOMListener} from '@core/DOMListener'
+import { DOMListener } from "@core/DOMListener";
 
+export class ExcelComponent extends DOMListener {
+  constructor($root, options = {}) {
+    super($root, options.listeners);
+    (this.name = options.name || ""),
+      (this.emitter = options.emitter),
+      (this.subscribe = options.subscribe || []),
+      (this.store = options.store),
+      (this.unsubs = []),
+      this.prepare();
+  }
 
-export class ExcelComponent extends DOMListener{
+  prepare() {}
 
-    constructor($root, options = {}){
-        super($root, options.listeners)
-        this.name = options.name || '',
-        this.emitter = options.emitter,
-        this.subscribe = options.subscribe || [],
-        this.store = options.store,
-        this.unsubs = [],
-        this.prepare()
-    }
+  toHTML() {
+    return "";
+  }
 
-    prepare() {}
+  $dispatch(action) {
+    this.store.dispatch(action);
+  }
 
-    toHTML(){return ''}
+  storeChanged() {}
 
-    $dispatch(action){
-        this.store.dispatch(action)
-    }
+  isWatching(key) {
+    return this.subscribe.includes(key);
+  }
 
-    storeChanged() {}
+  $on(data, fn) {
+    const unsub = this.emitter.subscribe(data, fn);
+    this.unsubs.push(unsub);
+  }
 
-    isWatching(key){
-       return this.subscribe.includes(key)
-    }
+  $emit(data, ...args) {
+    this.emitter.emit(data, ...args);
+  }
 
-    $on(data, fn){
-        const unsub = this.emitter.subscribe(data, fn) 
-        this.unsubs.push(unsub)
-    }
+  init() {
+    this.initDOMListeners();
+  }
 
-    $emit(data, ...args){
-        this.emitter.emit(data, ...args)
-    }
-
-    init(){
-        this.initDOMListeners()
-    }
-
-    destroy(){
-        this.removeDOMlisteners()
-        this.unsubs.forEach(unsub => unsub())
-    }
+  destroy() {
+    this.removeDOMlisteners();
+    this.unsubs.forEach((unsub) => unsub());
+  }
 }

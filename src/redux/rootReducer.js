@@ -1,51 +1,59 @@
-import {TABLE_RESIZE, CHANGE_TEXT, CHANGE_STYLES, APPLY_STYLE, CHANGE_HEADER, CHANGE_DATE} from "./types"
+import {
+  TABLE_RESIZE,
+  CHANGE_TEXT,
+  CHANGE_STYLES,
+  APPLY_STYLE,
+  CHANGE_HEADER,
+  CHANGE_DATE,
+} from "./types";
 
-export function rootReducer(state, action) { 
-  let field
-  let val 
+export function rootReducer(state, action) {
+  let field;
+  let val;
 
-  switch (action.type){
+  switch (action.type) {
     case TABLE_RESIZE:
-    field = action.data.type === 'col' ? 'colState' : 'rowState'
-    return {...state, [field]: value(state,field, action)};
+      field = action.data.type === "col" ? "colState" : "rowState";
+      return { ...state, [field]: value(state, field, action) };
 
     case CHANGE_TEXT:
-      field = 'dataState'
-  
-      return {...state,
-         currentText: action.data.value,
-         [field]: value(state,field, action)
-        }
+      field = "dataState";
 
+      return {
+        ...state,
+        currentText: action.data.value,
+        [field]: value(state, field, action),
+      };
 
-    case CHANGE_STYLES: 
-      return {...state, currentStyles: action.data};
+    case CHANGE_STYLES:
+      return { ...state, currentStyles: action.data };
 
     case APPLY_STYLE:
-      field = 'stylesState'
-      val = state[field] || {}
-      action.data.ids.forEach(id => {
-        val[id] = {...val[id], ...action.data.value}
-      })
+      field = "stylesState";
+      val = state[field] || {};
+      action.data.ids.forEach((id) => {
+        val[id] = { ...val[id], ...action.data.value };
+      });
 
-      return {...state, [field]: val, currentStyles: {...state.currentStyles, ...action.data.value}};
+      return {
+        ...state,
+        [field]: val,
+        currentStyles: { ...state.currentStyles, ...action.data.value },
+      };
 
+    case CHANGE_HEADER:
+      return { ...state, currentHeader: action.data };
 
-    case CHANGE_HEADER: 
-      return {...state, currentHeader: action.data}
+    case CHANGE_DATE:
+      return { ...state, date: new Date().toJSON() };
 
-    case CHANGE_DATE: 
-      return {...state, date: new Date().toJSON()}
-
-      
-    default: return state
-
+    default:
+      return state;
   }
-}  
+}
 
-
-function value(state, field, action){
-  const val = state[field] || {}
-  val[action.data.id] = action.data.value
-  return val
+function value(state, field, action) {
+  const val = state[field] || {};
+  val[action.data.id] = action.data.value;
+  return val;
 }
